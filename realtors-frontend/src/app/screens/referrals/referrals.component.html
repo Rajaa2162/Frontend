@@ -1,0 +1,22 @@
+<div class="min-h-screen px-6 py-16 bg-gray-950 text-white">
+  <h2 class="text-3xl font-bold text-center mb-10">🤝 My Referrals</h2>
+
+  <div class="overflow-x-auto max-w-3xl mx-auto">
+    <table class="w-full border border-gray-700 text-left">
+      <thead class="bg-gray-800 text-yellow-400">
+        <tr>
+          <th class="p-3">User</th>
+          <th class="p-3">Capital</th>
+          <th class="p-3">Your Reward</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of referredUsers" class="border-b border-gray-700 hover:bg-gray-800">
+          <td class="p-3">{{ user.name }}</td>
+          <td class="p-3">₹{{ user.capital | number }}</td>
+          <td class="p-3">₹{{ user.reward | number }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> 

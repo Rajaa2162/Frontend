@@ -1,0 +1,553 @@
+<section
+  class="relative min-h-screen overflow-hidden flex items-center justify-center text-white py-16 sm:py-24 md:py-32"
+  id="hero"
+>
+  <!-- Background image with parallax effect -->
+  <div
+    class="absolute inset-0 bg-fixed bg-center bg-cover parallax-bg"
+    style="background-image: url('assets/bg-ai-network.jpg'); z-index: -1;"
+  ></div>
+
+  <!-- Enhanced gradient overlay for better text readability -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 to-black/95 z-0"></div>
+
+  <!-- Foreground content with improved spacing and animations -->
+  <div
+    class="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto"
+  >
+    <!-- Main heading with enhanced typography and animation -->
+    <h1
+      class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight leading-tight mb-8 animate-fade-in-up"
+    >
+      Unlock <span class="text-green-400 drop-shadow-xl relative">
+        Guaranteed Crypto Profits
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-green-400 transform scale-x-0 animate-scale-x"></span>
+      </span> with AI
+    </h1>
+
+    <!-- Subheading with improved readability and animation -->
+    <p
+      class="text-lg sm:text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed mb-12 animate-fade-in-up"
+    >
+      Experience the future of digital wealth. 
+      <strong class="text-white font-semibold relative">
+        Realtors AI
+        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-white transform scale-x-0 animate-scale-x"></span>
+      </strong> 
+      uses advanced analytics, live trading intelligence, and strategic crypto algorithms to provide 
+      <span class="text-green-300 font-semibold">guaranteed daily returns</span> 
+      — safer, smarter, and fully automated.
+    </p>
+
+    <!-- CTA Buttons with enhanced styling -->
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-16 animate-fade-in-up">
+      <a
+        routerLink="/auth"
+        class="inline-flex items-center justify-center bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 sm:px-10 py-4 rounded-full shadow-2xl font-bold text-lg sm:text-xl transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-offset-2 focus:ring-offset-black"
+      >
+        Start Trading Now
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+        </svg>
+      </a>
+      <button
+        (click)="scrollToSection('features')"
+        class="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white px-8 sm:px-10 py-4 rounded-full shadow-2xl font-bold text-lg sm:text-xl transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black"
+      >
+        Learn More
+        <span class="ml-2 animate-bounce-subtle">↓</span>
+      </button>
+    </div>
+
+    <!-- Stats section with animations -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto w-full animate-fade-in-up">
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 transform hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold text-green-400 mb-2">$2.5M+</div>
+        <div class="text-gray-300">Total Trading Volume</div>
+      </div>
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 transform hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold text-green-400 mb-2">98%</div>
+        <div class="text-gray-300">Success Rate</div>
+      </div>
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 transform hover:scale-105 transition-transform duration-300">
+        <div class="text-4xl font-bold text-green-400 mb-2">10K+</div>
+        <div class="text-gray-300">Active Traders</div>
+      </div>
+    </div>
+
+    <!-- Lottie animation with improved positioning -->
+    <div class="w-full max-w-2xl mx-auto mt-16 animate-fade-in-up">
+      <ng-lottie
+        [options]="lottieOptions"
+        width="100%"
+        height="auto"
+        class="block drop-shadow-2xl"
+      ></ng-lottie>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-950 text-white py-20 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-4xl font-bold mb-12 text-green-400">Tired of Crypto Volatility?</h2>
+    <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+      The crypto market is known for its dramatic swings. Most investors struggle to navigate its complexities, often leading to losses. At Realtors AI, we believe everyone deserves a chance to profit securely from digital assets.
+    </p>
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="text-left">
+        <h3 class="text-3xl font-semibold mb-4">Our Solution: **Realtors Smart AI**</h3>
+        <p class="text-lg text-gray-400 leading-relaxed">
+          We've developed a revolutionary AI-powered trading system that:
+        </p>
+        <ul class="mt-6 space-y-4">
+          <li class="flex items-start">
+            <span class="text-green-400 mr-2">✓</span>
+            <span class="text-gray-300">Analyzes market trends in real-time</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-400 mr-2">✓</span>
+            <span class="text-gray-300">Executes trades with precision timing</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-400 mr-2">✓</span>
+            <span class="text-gray-300">Maximizes profit while minimizing risk</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <img src="assets/ai-concept-graphic.svg" alt="Realtors AI System" class="w-full h-auto rounded-lg shadow-lg">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-black text-white py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16 text-green-400">How Realtors AI Guarantees Your Returns</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="text-center p-6 bg-gray-900 rounded-lg shadow-xl">
+        <div class="flex items-center justify-center w-16 h-16 bg-green-500 rounded-full mx-auto mb-6 text-3xl font-bold">1</div>
+        <h3 class="text-2xl font-semibold mb-3">AI Market Analysis</h3>
+        <p class="text-gray-300">Our advanced AI, **Realtors Smart AI**, continuously scans global crypto markets, identifying optimal entry and exit points.</p>
+      </div>
+      <div class="text-center p-6 bg-gray-900 rounded-lg shadow-xl">
+        <div class="flex items-center justify-center w-16 h-16 bg-green-500 rounded-full mx-auto mb-6 text-3xl font-bold">2</div>
+        <h3 class="text-2xl font-semibold mb-3">Automated Precision Trading</h3>
+        <p class="text-gray-300">The AI executes high-frequency trades with unmatched speed and accuracy, capitalizing on micro-opportunities.</p>
+      </div>
+      <div class="text-center p-6 bg-gray-900 rounded-lg shadow-xl">
+        <div class="flex items-center justify-center w-16 h-16 bg-green-500 rounded-full mx-auto mb-6 text-3xl font-bold">3</div>
+        <h3 class="text-2xl font-semibold mb-3">Guaranteed Profit Distribution</h3>
+        <p class="text-gray-300">Your profits are automatically calculated and distributed daily, ensuring consistent returns on your investment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-950 text-white py-20 px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
+    <div class="p-6 bg-gray-900 rounded-lg shadow-lg">
+      <h2 class="text-5xl font-bold text-green-400">₹5Cr+</h2>
+      <p class="text-gray-400 mt-3 text-lg">**Total Profit Generated** for Users</p>
+    </div>
+    <div class="p-6 bg-gray-900 rounded-lg shadow-lg">
+      <h2 class="text-5xl font-bold text-green-400">12,000+</h2>
+      <p class="text-gray-400 mt-3 text-lg">**Satisfied Investors** Worldwide</p>
+    </div>
+    <div class="p-6 bg-gray-900 rounded-lg shadow-lg">
+      <h2 class="text-5xl font-bold text-green-400">99.8%</h2>
+      <p class="text-gray-400 mt-3 text-lg">**Success Rate** on Trades</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-black py-20 px-6">
+  <h2 class="text-center text-4xl font-bold text-white mb-16 text-green-400">Why Choose Realtors AI for Your Crypto Investments?</h2>
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+    <div class="p-6 bg-gray-900 rounded-lg shadow-xl flex items-start space-x-4">
+      <svg class="w-10 h-10 text-green-400 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Guaranteed Daily Returns</h3>
+        <p class="text-gray-300">Our AI system is designed to generate consistent profits, with a proven track record of daily returns.</p>
+      </div>
+    </div>
+    <div class="p-6 bg-gray-900 rounded-lg shadow-xl flex items-start space-x-4">
+      <svg class="w-10 h-10 text-green-400 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Advanced Risk Management</h3>
+        <p class="text-gray-300">Multiple layers of security and risk management ensure your investments are protected.</p>
+      </div>
+    </div>
+    <div class="p-6 bg-gray-900 rounded-lg shadow-xl flex items-start space-x-4">
+      <svg class="w-10 h-10 text-green-400 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3-8H9V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2z"/></svg>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">Secure Platform</h3>
+        <p class="text-gray-300">Bank-grade security measures protect your funds and personal information.</p>
+      </div>
+    </div>
+    <div class="p-6 bg-gray-900 rounded-lg shadow-xl flex items-start space-x-4">
+      <svg class="w-10 h-10 text-green-400 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <div>
+        <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
+        <p class="text-gray-300">Our dedicated team is always available to assist you with any questions or concerns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-950 text-white py-20 px-6">
+  <h2 class="text-center text-4xl font-bold mb-16 text-green-400">What Our Investors Say</h2>
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div class="bg-gray-900 p-8 rounded-lg shadow-xl text-center">
+      <p class="italic text-gray-300 mb-6">"I was skeptical about crypto, but Realtors AI changed everything. The guaranteed daily profits are real, and their support is fantastic!"</p>
+      <p class="font-semibold text-green-400">- Priya S., Chennai</p>
+    </div>
+    <div class="bg-gray-900 p-8 rounded-lg shadow-xl text-center">
+      <p class="italic text-gray-300 mb-6">"Finally, a crypto platform I can trust. The AI's accuracy is mind-blowing, and my portfolio has grown steadily."</p>
+      <p class="font-semibold text-green-400">- Rajesh K., Mumbai</p>
+    </div>
+    <div class="bg-gray-900 p-8 rounded-lg shadow-xl text-center">
+      <p class="italic text-gray-300 mb-6">"The passive income from the referral program is a brilliant bonus. Realtors AI is truly revolutionizing crypto investments."</p>
+      <p class="font-semibold text-green-400">- Sarah L., Bengaluru</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gradient-to-r from-green-600 to-green-400 py-20 text-center text-black">
+  <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-white drop-shadow-lg">Ready to Secure Your Financial Future?</h2>
+  <p class="text-xl md:text-2xl text-white mb-10 max-w-3xl mx-auto">
+    Join thousands of successful investors who are already earning guaranteed daily profits with Realtors AI.
+  </p>
+  <a routerLink="/auth" class="inline-flex items-center justify-center bg-white text-green-600 px-8 sm:px-10 py-4 rounded-full shadow-2xl font-bold text-lg sm:text-xl transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500">
+    Start Your Journey Today
+  </a>
+</section>
+
+<!-- Features Section -->
+<section class="bg-gray-950 text-white py-20 px-6" id="features">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16 text-green-400 animate-fade-in-up">
+      Why Choose <span class="relative">
+        Realtors AI
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-green-400 transform scale-x-0 animate-scale-x"></span>
+      </span>
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Feature Card 1 -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 transform hover:scale-105 transition-all duration-300 animate-fade-in-up">
+        <div class="w-16 h-16 bg-green-400/20 rounded-full flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-white">Smart Predictions</h3>
+        <p class="text-gray-300">Our AI analyzes market patterns 24/7 to make precise trading decisions, maximizing your returns.</p>
+      </div>
+
+      <!-- Feature Card 2 -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 transform hover:scale-105 transition-all duration-300 animate-fade-in-up" style="animation-delay: 200ms;">
+        <div class="w-16 h-16 bg-green-400/20 rounded-full flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-white">Automated Trading</h3>
+        <p class="text-gray-300">Set it and forget it. Our system handles all trading operations automatically, 24/7.</p>
+      </div>
+
+      <!-- Feature Card 3 -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 transform hover:scale-105 transition-all duration-300 animate-fade-in-up" style="animation-delay: 400ms;">
+        <div class="w-16 h-16 bg-green-400/20 rounded-full flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-white">Secure & Reliable</h3>
+        <p class="text-gray-300">Your investments are protected with enterprise-grade security and constant monitoring.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="bg-black text-white py-20 px-6" id="how-it-works">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16 text-green-400 animate-fade-in-up">
+      How It <span class="relative">
+        Works
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-green-400 transform scale-x-0 animate-scale-x"></span>
+      </span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- Step 1 -->
+      <div class="relative animate-fade-in-up">
+        <div class="absolute -top-4 -left-4 w-12 h-12 bg-green-400 rounded-full flex items-center justify-center text-2xl font-bold text-black">1</div>
+        <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 h-full">
+          <h3 class="text-2xl font-bold mb-4 text-white">Register & Fund</h3>
+          <p class="text-gray-300">Create your account and deposit funds. Start with as little as $250.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="relative animate-fade-in-up" style="animation-delay: 200ms;">
+        <div class="absolute -top-4 -left-4 w-12 h-12 bg-green-400 rounded-full flex items-center justify-center text-2xl font-bold text-black">2</div>
+        <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 h-full">
+          <h3 class="text-2xl font-bold mb-4 text-white">Activate AI Bot</h3>
+          <p class="text-gray-300">Our AI trading bot starts analyzing markets and making profitable trades.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="relative animate-fade-in-up" style="animation-delay: 400ms;">
+        <div class="absolute -top-4 -left-4 w-12 h-12 bg-green-400 rounded-full flex items-center justify-center text-2xl font-bold text-black">3</div>
+        <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 h-full">
+          <h3 class="text-2xl font-bold mb-4 text-white">Enjoy Daily Profits</h3>
+          <p class="text-gray-300">Watch your account grow with guaranteed daily returns.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="bg-gray-950 text-white py-20 px-6" id="testimonials">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16 text-green-400 animate-fade-in-up">
+      Success <span class="relative">
+        Stories
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-green-400 transform scale-x-0 animate-scale-x"></span>
+      </span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Testimonial 1 -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 transform hover:scale-105 transition-all duration-300 animate-fade-in-up">
+        <div class="flex items-center mb-6">
+          <div class="w-12 h-12 bg-green-400/20 rounded-full flex items-center justify-center">
+            <span class="text-xl font-bold text-green-400">JD</span>
+          </div>
+          <div class="ml-4">
+            <h4 class="text-lg font-bold text-white">John Doe</h4>
+            <p class="text-gray-400">Trader since 2023</p>
+          </div>
+        </div>
+        <p class="text-gray-300">"Realtors AI has transformed my trading experience. The automated system is incredibly reliable and the returns are consistent."</p>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 transform hover:scale-105 transition-all duration-300 animate-fade-in-up" style="animation-delay: 200ms;">
+        <div class="flex items-center mb-6">
+          <div class="w-12 h-12 bg-green-400/20 rounded-full flex items-center justify-center">
+            <span class="text-xl font-bold text-green-400">AS</span>
+          </div>
+          <div class="ml-4">
+            <h4 class="text-lg font-bold text-white">Alice Smith</h4>
+            <p class="text-gray-400">Trader since 2023</p>
+          </div>
+        </div>
+        <p class="text-gray-300">"I was skeptical at first, but the results speak for themselves. The AI's predictions are spot on!"</p>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 transform hover:scale-105 transition-all duration-300 animate-fade-in-up" style="animation-delay: 400ms;">
+        <div class="flex items-center mb-6">
+          <div class="w-12 h-12 bg-green-400/20 rounded-full flex items-center justify-center">
+            <span class="text-xl font-bold text-green-400">RJ</span>
+          </div>
+          <div class="ml-4">
+            <h4 class="text-lg font-bold text-white">Robert Johnson</h4>
+            <p class="text-gray-400">Trader since 2023</p>
+          </div>
+        </div>
+        <p class="text-gray-300">"The best investment I've made. The platform is user-friendly and the support team is always helpful."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="bg-black text-white py-20 px-6" id="faq">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16 text-green-400 animate-fade-in-up">
+      Frequently Asked <span class="relative">
+        Questions
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-green-400 transform scale-x-0 animate-scale-x"></span>
+      </span>
+    </h2>
+
+    <div class="space-y-6">
+      <!-- FAQ Item 1 -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 animate-fade-in-up">
+        <h3 class="text-xl font-bold mb-4 text-white">How does Realtors AI guarantee returns?</h3>
+        <p class="text-gray-300">Our advanced AI system uses sophisticated algorithms and real-time market analysis to make profitable trading decisions, ensuring consistent returns.</p>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 animate-fade-in-up" style="animation-delay: 200ms;">
+        <h3 class="text-xl font-bold mb-4 text-white">What is the minimum investment?</h3>
+        <p class="text-gray-300">You can start with as little as $250. We believe in making AI trading accessible to everyone.</p>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 animate-fade-in-up" style="animation-delay: 400ms;">
+        <h3 class="text-xl font-bold mb-4 text-white">Is my investment safe?</h3>
+        <p class="text-gray-300">Yes, we use enterprise-grade security measures and your funds are protected with advanced encryption and monitoring systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="bg-gray-950 text-white py-20 px-6" id="contact">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16 text-green-400 animate-fade-in-up">
+      Get in <span class="relative">
+        Touch
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-green-400 transform scale-x-0 animate-scale-x"></span>
+      </span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- Contact Info -->
+      <div class="space-y-8 animate-fade-in-up">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-green-400/20 rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-lg font-bold text-white">Email Us</h3>
+            <p class="text-gray-300">support&#64;realtorsai.com</p>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-green-400/20 rounded-full flex items-center justify-center">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-lg font-bold text-white">Call Us</h3>
+            <p class="text-gray-300">+1 (555) 123-4567</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 animate-fade-in-up" style="animation-delay: 200ms;">
+        <form class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+            <input type="text" class="w-full px-4 py-3 bg-white/10 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-white" placeholder="Your name">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+            <input type="email" class="w-full px-4 py-3 bg-white/10 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-white" placeholder="Your email">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+            <textarea class="w-full px-4 py-3 bg-white/10 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-white" rows="4" placeholder="Your message"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-lg font-bold transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-offset-2 focus:ring-offset-black">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-gradient-to-r from-green-600 to-green-400 py-20 text-center text-black" id="cta">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-white drop-shadow-lg animate-fade-in-up">
+      Ready to Start Your Trading Journey?
+    </h2>
+    <p class="text-xl md:text-2xl text-white mb-10 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 200ms;">
+      Join thousands of successful traders who are already earning guaranteed daily profits with Realtors AI.
+    </p>
+    <div class="animate-fade-in-up" style="animation-delay: 400ms;">
+      <a routerLink="/auth" class="inline-flex items-center justify-center bg-white text-green-600 px-8 sm:px-10 py-4 rounded-full shadow-2xl font-bold text-lg sm:text-xl transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-500">
+        Get Started Now
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-gray-900 text-white py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Company Info -->
+      <div class="space-y-4">
+        <h3 class="text-xl font-bold text-green-400">Realtors AI</h3>
+        <p class="text-gray-400">Revolutionizing crypto trading with advanced AI technology and guaranteed returns.</p>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-green-400">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a routerLink="/auth" class="text-gray-400 hover:text-green-400 transition-colors">Register</a></li>
+          <li><a routerLink="/auth" class="text-gray-400 hover:text-green-400 transition-colors">Login</a></li>
+          <li><a href="#features" class="text-gray-400 hover:text-green-400 transition-colors">Features</a></li>
+          <li><a href="#how-it-works" class="text-gray-400 hover:text-green-400 transition-colors">How It Works</a></li>
+          <li><a href="#testimonials" class="text-gray-400 hover:text-green-400 transition-colors">Testimonials</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-green-400">Support</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Help Center</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Contact Us</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Privacy Policy</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Terms of Service</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-green-400">Contact Us</h3>
+        <ul class="space-y-2">
+          <li class="flex items-center text-gray-400">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            support&#64;realtorsai.com
+          </li>
+          <li class="flex items-center text-gray-400">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            +1 (555) 123-4567
+          </li>
+          <li class="flex items-center text-gray-400">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            123 AI Street, Tech City, TC 12345
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+      <p>&copy; 2024 Realtors AI. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
