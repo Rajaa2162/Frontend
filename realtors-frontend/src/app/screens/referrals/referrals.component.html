@@ -1,22 +1,124 @@
-<div class="min-h-screen px-6 py-16 bg-gray-950 text-white">
-  <h2 class="text-3xl font-bold text-center mb-10">🤝 My Referrals</h2>
+<main class="bg-gray-950 text-white min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-4xl font-extrabold text-center mb-10 text-blue-400">Your Referral Hub</h1>
+    <p class="text-gray-300 text-lg text-center mb-12">
+      Invite your network to Realtors AI and earn a generous <strong class="text-green-400">0.1% commission on their monthly average capital</strong>. Grow together!
+    </p>
 
-  <div class="overflow-x-auto max-w-3xl mx-auto">
-    <table class="w-full border border-gray-700 text-left">
-      <thead class="bg-gray-800 text-yellow-400">
-        <tr>
-          <th class="p-3">User</th>
-          <th class="p-3">Capital</th>
-          <th class="p-3">Your Reward</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of referredUsers" class="border-b border-gray-700 hover:bg-gray-800">
-          <td class="p-3">{{ user.name }}</td>
-          <td class="p-3">₹{{ user.capital | number }}</td>
-          <td class="p-3">₹{{ user.reward | number }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="bg-gray-900 rounded-xl shadow-2xl p-8 mb-12 border border-gray-800 text-center animate-fade-in">
+      <h2 class="text-2xl font-bold text-white mb-4">Your Unique Referral Code</h2>
+      <div class="flex items-center justify-center bg-gray-800 border border-blue-600 rounded-lg p-4 space-x-4">
+        <span class="text-3xl font-mono tracking-wider text-blue-400 select-all">{{ userReferralCode }}</span>
+        <button (click)="copyToClipboard(userReferralCode)"
+                class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Copy referral code">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2.293a1 1 0 01.707.293l3.707 3.707A1 1 0 0121 12.293V17m-9 2h.01"></path></svg>
+        </button>
+      </div>
+      <p class="text-gray-400 text-sm mt-4">Share this code with friends and family when they register.</p>
+    </div>
+
+    <div class="bg-gray-900 rounded-xl shadow-2xl p-8 mb-12 border border-gray-800 animate-fade-in">
+      <h2 class="text-2xl font-bold text-white mb-4">Or Share Your Referral Link</h2>
+      <div class="flex items-center justify-center bg-gray-800 border border-green-600 rounded-lg p-4 space-x-4">
+        <span class="text-base font-mono tracking-tight text-green-400 break-all">{{ referralLink }}</span>
+        <button (click)="copyToClipboard(referralLink)"
+                class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                aria-label="Copy referral link">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2.293a1 1 0 01.707.293l3.707 3.707A1 1 0 0121 12.293V17m-9 2h.01"></path></svg>
+        </button>
+      </div>
+      <p class="text-gray-400 text-sm mt-4">This link will automatically pre-fill your code during their registration.</p>
+    </div>
+
+    <div class="bg-gray-900 rounded-xl shadow-2xl p-8 mb-12 border border-gray-800 animate-fade-in">
+      <h2 class="text-2xl font-bold text-white mb-4 text-center">How Your Earnings Work</h2>
+      <ul class="space-y-4 text-gray-300">
+        <li>
+          <strong class="text-blue-400">1. Invite & Register:</strong> Share your unique code or link. When someone registers using your referral, they're linked to you.
+        </li>
+        <li>
+          <strong class="text-blue-400">2. Capital Contribution:</strong> Your referred users start depositing funds and growing their capital with Realtors AI.
+        </li>
+        <li>
+          <strong class="text-blue-400">3. Monthly Commission:</strong> At the end of each month, we calculate the average capital of all your active referred users.
+        </li>
+        <li>
+          <strong class="text-blue-400">4. 0.1% Reward:</strong> You automatically receive 0.1% of this calculated average capital as a commission, directly credited to your Realtors AI balance.
+        </li>
+        <li>
+          <strong class="text-blue-400">5. Continuous Earnings:</strong> As long as your referred users maintain capital and remain active, you'll continue to earn every month!
+        </li>
+      </ul>
+      <p class="text-gray-400 text-sm mt-6 text-center">
+        This system is designed to reward you for building our community. The more successful your referrals are, the more you earn!
+      </p>
+    </div>
+
+    <div class="bg-gray-900 rounded-xl shadow-2xl p-8 mb-12 border border-gray-800 animate-fade-in">
+      <h2 class="text-2xl font-bold text-white mb-4">Your Referral Summary</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center mb-6">
+        <div class="bg-gray-800 p-4 rounded-lg shadow">
+          <p class="text-gray-400 text-sm">Total Referred Users</p>
+          <p class="text-3xl font-bold text-blue-400">{{ totalReferredUsers }}</p>
+        </div>
+        <div class="bg-gray-800 p-4 rounded-lg shadow">
+          <p class="text-gray-400 text-sm">Total Earnings to Date</p>
+          <p class="text-3xl font-bold text-green-400">${{ totalEarned | number:'1.2-2' }}</p>
+        </div>
+      </div>
+
+      <h3 class="text-xl font-semibold text-white mb-4 border-b border-gray-700 pb-2">Recent Earnings</h3>
+      <ul class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar">
+        <li *ngFor="let earning of recentEarnings" class="bg-gray-800 p-3 rounded-md flex items-center justify-between">
+          <div>
+            <p class="font-semibold text-white">Earned from {{ earning.referredUsername }}</p>
+            <p class="text-sm text-gray-400">{{ earning.period }}</p>
+          </div>
+          <p class="font-bold text-green-400">${{ earning.amount | number:'1.2-2' }}</p>
+        </li>
+        <li *ngIf="recentEarnings.length === 0" class="text-center text-gray-500 py-4">
+          No recent earnings yet. Start inviting!
+        </li>
+      </ul>
+      <p class="text-gray-400 text-sm mt-6">
+        Earnings are calculated monthly based on referred users' average capital.
+      </p>
+    </div>
+
+    <div class="text-center mt-12">
+      <a routerLink="/dashboard" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full shadow-lg font-bold text-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-300">
+        Back to Dashboard
+      </a>
+    </div>
+
   </div>
-</div> 
+</main>
+
+<style>
+  /* Custom Scrollbar for Recent Earnings */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #1f2937; /* gray-800 */
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #4b5563; /* gray-600 */
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #6b7280; /* gray-500 */
+  }
+
+  /* Animations for elegance */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+</style> 

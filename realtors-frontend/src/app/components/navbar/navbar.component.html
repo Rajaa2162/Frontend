@@ -1,43 +1,60 @@
-<nav class="sticky top-0 z-50 bg-gray-950 text-white shadow-xl">
+<nav class="sticky top-0 z-50 bg-gray-950 text-white shadow-xl animate-fade-in-up">
   <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center h-16">
     <a routerLink="/" class="flex items-center space-x-2 text-white hover:opacity-90 transition-opacity duration-200" aria-label="Realtors AI Home">
       
       <span class="text-2xl font-bold text-blue-400">Realtors AI</span>
     </a>
 
-    <div class="hidden md:flex items-center space-x-8">
-      <ul class="flex space-x-6">
-        <li><a routerLink="/features" routerLinkActive="active-nav-link" class="nav-link">Features</a></li>
-        <li><a routerLink="/how-it-works" routerLinkActive="active-nav-link" class="nav-link">How It Works</a></li>
-        <li><a routerLink="/testimonials" routerLinkActive="active-nav-link" class="nav-link">Testimonials</a></li>
-        <li><a routerLink="/faq" routerLinkActive="active-nav-link" class="nav-link">FAQ</a></li>
-        <li><a routerLink="/contact" routerLinkActive="active-nav-link" class="nav-link">Contact</a></li>
-      </ul>
+    <div class="hidden md:flex items-center space-x-8" *ngIf="!isLoggedIn && !isAuthPage">
+      <a routerLink="/features" class="hover:text-green-400 transition-colors">Features</a>
+      <a routerLink="/how-it-works" class="hover:text-green-400 transition-colors">How It Works</a>
+      <a routerLink="/testimonials" class="hover:text-green-400 transition-colors">Testimonials</a>
+      <a routerLink="/faq" class="hover:text-green-400 transition-colors">FAQ</a>
+      <a routerLink="/contact" class="hover:text-green-400 transition-colors">Contact</a>
+    </div>
 
-      <ng-container *ngIf="isLoggedIn; else guestActionsDesktop">
-        <a routerLink="/dashboard" class="action-button bg-blue-600 hover:bg-blue-700">Dashboard</a>
-        <button (click)="logout()" class="action-button-secondary bg-red-600 hover:bg-red-700" aria-label="Logout">Logout</button>
+    <div class="flex items-center space-x-4" *ngIf="!isAuthPage">
+      <ng-container *ngIf="!isLoggedIn; else loggedInMenu">
+        <a routerLink="/auth" class="bg-green-400 text-white px-6 py-2 rounded-full hover:bg-green-500 transition-colors">
+          Get Started
+        </a>
       </ng-container>
-
-      <ng-template #guestActionsDesktop>
-        <a routerLink="/auth" class="action-button bg-green-500 hover:bg-green-600">Login / Register</a>
+      <ng-template #loggedInMenu>
+        <div class="relative" (click)="toggleDropdown()">
+          <button class="flex items-center space-x-2 hover:text-green-400 transition-colors">
+            <span>{{ username }}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-xl py-2 z-50">
+            <a routerLink="/dashboard" class="block px-4 py-2 hover:bg-gray-800">Dashboard</a>
+            <a routerLink="/profile" class="block px-4 py-2 hover:bg-gray-800">Profile</a>
+            <a routerLink="/history" class="block px-4 py-2 hover:bg-gray-800">History</a>
+            <a routerLink="/referrals" class="block px-4 py-2 hover:bg-gray-800">Referrals</a>
+            <button (click)="logout()" class="block w-full text-left px-4 py-2 hover:bg-gray-800 text-red-400">
+              Logout
+            </button>
+          </div>
+        </div>
       </ng-template>
     </div>
 
-    <button class="md:hidden text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    <button class="md:hidden text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 animate-bounce-subtle"
             (click)="toggleMenu()"
-            [attr.aria-expanded]="menuOpen"
+            [attr.aria-expanded]="isMobileMenuOpen"
             aria-controls="mobile-menu"
-            aria-label="Toggle navigation menu">
+            aria-label="Toggle navigation menu"
+            *ngIf="!isAuthPage">
       <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path *ngIf="!menuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        <path *ngIf="menuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        <path *ngIf="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        <path *ngIf="isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
   </div>
 
-  <div *ngIf="menuOpen" id="mobile-menu" class="md:hidden absolute inset-x-0 top-full bg-gray-900 shadow-lg pb-4 transition-all duration-300 ease-in-out transform origin-top"
-       [ngClass]="{'scale-y-100 opacity-100': menuOpen, 'scale-y-0 opacity-0': !menuOpen}">
+  <div *ngIf="isMobileMenuOpen && !isAuthPage" id="mobile-menu" class="md:hidden absolute inset-x-0 top-full bg-gray-900 shadow-lg pb-4 transition-all duration-300 ease-in-out transform origin-top animate-fade-in-up"
+       [ngClass]="{'scale-y-100 opacity-100': isMobileMenuOpen, 'scale-y-0 opacity-0': !isMobileMenuOpen}">
     <ul class="space-y-2 px-4 py-2">
       <li><a routerLink="/features" (click)="toggleMenu()" class="mobile-nav-link">Features</a></li>
       <li><a routerLink="/how-it-works" (click)="toggleMenu()" class="mobile-nav-link">How It Works</a></li>
@@ -45,11 +62,8 @@
       <li><a routerLink="/faq" (click)="toggleMenu()" class="mobile-nav-link">FAQ</a></li>
       <li><a routerLink="/contact" (click)="toggleMenu()" class="mobile-nav-link">Contact</a></li>
 
-      <ng-container *ngIf="isLoggedIn; else mobileGuestActions">
-        <li><a routerLink="/dashboard" (click)="toggleMenu()" class="mobile-nav-link font-semibold text-blue-300">Dashboard</a></li>
-        <li><a routerLink="/profile" (click)="toggleMenu()" class="mobile-nav-link">Profile</a></li>
-        <li><a routerLink="/history" (click)="toggleMenu()" class="mobile-nav-link">History</a></li>
-        <li><button (click)="logout(); toggleMenu()" class="w-full text-left py-3 px-2 text-red-400 hover:bg-gray-800 rounded-md transition-colors duration-200">Logout</button></li>
+      <ng-container *ngIf="!isLoggedIn; else mobileGuestActions">
+        <li><a routerLink="/auth" (click)="toggleMenu()" class="mobile-nav-link font-semibold text-green-300">Login / Register</a></li>
       </ng-container>
 
       <ng-template #mobileGuestActions>

@@ -1,0 +1,140 @@
+/* Enhanced Hero Section Styles */
+.text-gradient {
+  background: linear-gradient(45deg, #00ff87, #60efff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating Elements Animation */
+.floating-element {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  animation: float 6s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Enhanced CTA Buttons */
+.cta-button-primary {
+  @apply relative inline-flex items-center justify-center text-white px-8 sm:px-10 py-4 rounded-full shadow-2xl font-bold text-lg sm:text-xl overflow-hidden;
+}
+
+.cta-button-secondary {
+  @apply relative inline-flex items-center justify-center text-white px-8 sm:px-10 py-4 rounded-full shadow-2xl font-bold text-lg sm:text-xl overflow-hidden;
+}
+
+/* Stat Cards */
+.stat-card {
+  @apply relative bg-white/5 backdrop-blur-sm rounded-xl p-6 overflow-hidden;
+}
+
+/* Typing Effect */
+.typing-effect {
+  border-right: 2px solid #00ff87;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #00ff87 }
+}
+
+/* Enhanced Animations */
+.animate-scale-x {
+  animation: scaleX 1s ease-out forwards;
+}
+
+@keyframes scaleX {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 2s infinite;
+}
+
+@keyframes bounceSubtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Parallax Effect */
+.parallax-bg {
+  transform: translateZ(-1px) scale(2);
+  z-index: -1;
+}
+
+/* Glass Morphism */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Hover Effects */
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 135, 0.5);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .typing-effect {
+    white-space: normal;
+    animation: none;
+    border-right: none;
+  }
+  
+  .stat-card {
+    @apply p-4;
+  }
+}
+
+/* Dark Mode Enhancements */
+@media (prefers-color-scheme: dark) {
+  .glass-effect {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 135, 0.3);
+  }
+} 

@@ -135,7 +135,7 @@
 @keyframes fade-in-up {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -143,26 +143,36 @@
   }
 }
 
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 /* Animation classes */
 .animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
-  opacity: 0;
+  animation: fade-in-up 0.8s cubic-bezier(0.4,0,0.2,1) both;
 }
 
-.animate-scale-in {
-  animation: scale-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  opacity: 0;
+.animate-slide-in-left {
+  animation: slide-in-left 0.8s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.8s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 1.5s infinite cubic-bezier(0.4,0,0.2,1);
 }
 
 /* Parallax background */
@@ -447,4 +457,20 @@ ng-lottie {
   max-width: 100%;
   transform: translateZ(0);
   will-change: transform;
-} 
+}
+
+/* Staggered delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+.delay-900 { animation-delay: 0.9s; }
+
+/* Utility for cards and buttons */
+.card-animate { @apply animate-fade-in-up transition-all duration-300; }
+.button-animate { @apply animate-bounce-subtle transition-all duration-300; }
+.heading-animate { @apply animate-fade-in-up; } 

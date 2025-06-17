@@ -1,3 +1,66 @@
-.input-style {
-  @apply w-full p-2 bg-gray-800 border border-gray-700 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500;
+/* Base input style */
+.auth-input {
+  @apply w-full px-4 py-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200;
+}
+
+/* Animations for elegance */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.3s ease-out forwards;
+}
+
+/* Auth Card Styles */
+.parallax-bg {
+  background-attachment: fixed;
+}
+
+/* Button and Interactive Elements */
+button[aria-label="Toggle password visibility"] {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: color 0.2s;
+}
+button[aria-label="Toggle password visibility"]:hover {
+  color: #fff;
+}
+
+/* Card and Button Animations */
+.bg-gray-900 {
+  animation: fadeIn 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+button {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+button:active {
+  transform: scale(0.97);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .bg-gray-900 {
+    padding: 1.5rem;
+  }
 } 

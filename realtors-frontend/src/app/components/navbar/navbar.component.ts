@@ -1,26 +1,42 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  menuOpen = false;
   isLoggedIn = false; // This should be connected to your auth service
+  username = 'User'; // This should be connected to your auth service
+  isDropdownOpen = false;
+  isMobileMenuOpen = false;
+  isAuthPage = false;
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.isAuthPage = event.urlAfterRedirects.startsWith('/auth');
+    });
   }
 
-  logout() {
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  toggleMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  logout(): void {
     // Implement logout logic here
     this.isLoggedIn = false;
-    // Add your auth service logout call
+    this.isDropdownOpen = false;
   }
 
   login() {

@@ -1,25 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LottieComponent } from 'ngx-lottie';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, RouterModule, LottieComponent],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrls: ['./home.css'],
+  standalone: true,
+  imports: [CommonModule, RouterModule]
 })
-export class HomeComponent implements OnInit {
-  lottieOptions = {
-    path: '/assets/animations/trading.json',
-    loop: true,
-    autoplay: true
-  };
-
+export class HomeComponent {
   constructor(private viewportScroller: ViewportScroller) {}
-
-  ngOnInit(): void {}
 
   scrollToSection(sectionId: string): void {
     this.viewportScroller.scrollToAnchor(sectionId);

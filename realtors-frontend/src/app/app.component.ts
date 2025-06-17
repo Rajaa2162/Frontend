@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent],
+  imports: [RouterOutlet, RouterModule, CommonModule, NavbarComponent],
   template: `
     <app-navbar></app-navbar>
-    <main>
+    <main class="bg-gray-950">
       <router-outlet></router-outlet>
     </main>
   `,
   styles: [`
     main {
       min-height: calc(100vh - 64px);
+      background-color: rgb(3 7 18);
     }
   `]
 })
