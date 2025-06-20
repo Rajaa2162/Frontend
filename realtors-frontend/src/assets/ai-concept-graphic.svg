@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#1a1a1a"/>
+  
+  <!-- Neural Network Nodes -->
+  <g fill="#10B981" stroke="#10B981" stroke-width="2">
+    <!-- Input Layer -->
+    <circle cx="150" cy="150" r="20"/>
+    <circle cx="150" cy="250" r="20"/>
+    <circle cx="150" cy="350" r="20"/>
+    
+    <!-- Hidden Layer -->
+    <circle cx="400" cy="150" r="20"/>
+    <circle cx="400" cy="250" r="20"/>
+    <circle cx="400" cy="350" r="20"/>
+    
+    <!-- Output Layer -->
+    <circle cx="650" cy="250" r="20"/>
+  </g>
+  
+  <!-- Connections -->
+  <g stroke="#10B981" stroke-width="2" opacity="0.5">
+    <!-- Input to Hidden -->
+    <line x1="170" y1="150" x2="380" y2="150"/>
+    <line x1="170" y1="150" x2="380" y2="250"/>
+    <line x1="170" y1="150" x2="380" y2="350"/>
+    
+    <line x1="170" y1="250" x2="380" y2="150"/>
+    <line x1="170" y1="250" x2="380" y2="250"/>
+    <line x1="170" y1="250" x2="380" y2="350"/>
+    
+    <line x1="170" y1="350" x2="380" y2="150"/>
+    <line x1="170" y1="350" x2="380" y2="250"/>
+    <line x1="170" y1="350" x2="380" y2="350"/>
+    
+    <!-- Hidden to Output -->
+    <line x1="420" y1="150" x2="630" y2="250"/>
+    <line x1="420" y1="250" x2="630" y2="250"/>
+    <line x1="420" y1="350" x2="630" y2="250"/>
+  </g>
+  
+  <!-- Labels -->
+  <g fill="white" font-family="Arial" font-size="16">
+    <text x="100" y="140">Input</text>
+    <text x="100" y="240">Input</text>
+    <text x="100" y="340">Input</text>
+    
+    <text x="350" y="140">Hidden</text>
+    <text x="350" y="240">Hidden</text>
+    <text x="350" y="340">Hidden</text>
+    
+    <text x="600" y="240">Output</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="50" fill="white" font-family="Arial" font-size="24" text-anchor="middle">AI Neural Network</text>
+</svg> 

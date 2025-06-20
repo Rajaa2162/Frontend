@@ -1,0 +1,225 @@
+@import 'aos/dist/aos.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Custom styles */
+.parallax-bg {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { 
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to { 
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from { 
+    -webkit-transform: translateX(-20px);
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to { 
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0% { 
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  50% { 
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  100% { 
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Delay classes */
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+/* Custom styles can be added below */
+
+/* High Contrast Mode Support */
+@media (forced-colors: active) {
+  /* Ensure text remains readable */
+  body {
+    forced-color-adjust: none;
+    -webkit-forced-color-adjust: none;
+  }
+  
+  /* Ensure interactive elements are visible */
+  button, 
+  a,
+  input,
+  select,
+  textarea {
+    forced-color-adjust: none;
+    -webkit-forced-color-adjust: none;
+    border: 2px solid CanvasText;
+  }
+
+  /* Ensure focus indicators are visible */
+  :focus {
+    outline: 2px solid CanvasText;
+    outline-offset: 2px;
+  }
+
+  /* Ensure form elements maintain visibility */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  textarea {
+    background-color: Canvas;
+    color: CanvasText;
+    border: 2px solid CanvasText;
+  }
+
+  /* Ensure buttons maintain visibility */
+  button {
+    background-color: Canvas;
+    color: CanvasText;
+  }
+
+  /* Ensure links maintain visibility */
+  a {
+    color: LinkText;
+    text-decoration: underline;
+  }
+
+  /* Ensure disabled elements are visible */
+  [disabled] {
+    opacity: 0.5;
+    forced-color-adjust: none;
+    -webkit-forced-color-adjust: none;
+  }
+
+  /* Ensure icons and SVGs maintain visibility */
+  svg {
+    forced-color-adjust: none;
+    -webkit-forced-color-adjust: none;
+  }
+
+  /* Ensure custom scrollbars are visible */
+  ::-webkit-scrollbar {
+    background-color: Canvas;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: CanvasText;
+    border: 2px solid Canvas;
+  }
+}
+
+/* Safari-specific high contrast mode support */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @supports (-webkit-appearance:none) {
+    /* Add Safari-specific high contrast styles here */
+    .high-contrast {
+      -webkit-filter: contrast(150%);
+      filter: contrast(150%);
+    }
+  }
+}
+
+/* Base styles */
+html,
+:host {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Backdrop filter support */
+.backdrop-blur {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+} 
