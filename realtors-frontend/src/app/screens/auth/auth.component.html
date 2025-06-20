@@ -1,202 +1,59 @@
-<main class="relative min-h-screen flex items-center justify-center bg-gray-950 text-white overflow-hidden py-10 px-4 sm:px-6 lg:px-8">
-  <!-- Background image (subtly visible) -->
-  <div
-    class="absolute inset-0 bg-fixed bg-center bg-cover parallax-bg opacity-20"
-    style="background-image: url('/assets/bg-ai-network.jpg'); z-index: 0;"
-  ></div>
-
-  <!-- Gradient Overlay -->
-  <div class="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/80 z-10"></div>
-
-  <!-- Auth Card -->
-  <div class="relative z-20 w-full max-w-sm md:max-w-md bg-gray-900 rounded-xl shadow-2xl p-6 sm:p-8 border border-gray-800 animate-scale-in">
-
-    <!-- Logo and Title -->
-    <div class="text-center mb-10">
-      <a routerLink="/" class="inline-flex items-center space-x-2 mb-4 text-white hover:opacity-90 transition-opacity duration-200" aria-label="Realtors AI Home">
-        <img src="/assets/images/realtors-ai-logo.svg" alt="Realtors AI Logo" class="h-10 w-auto">
-        <span class="text-3xl font-extrabold text-blue-400">Realtors AI</span>
-      </a>
-      <p class="text-gray-400 text-lg mt-2">Your Gateway to Crypto Profits</p>
-    </div>
-
-    <!-- Toggle Buttons for Login/Register -->
-    <div class="flex bg-gray-800 rounded-full p-1 mb-8 shadow-inner">
-      <button
-        (click)="setActiveTab('login')"
-        [ngClass]="{'bg-blue-600 text-white shadow-md': activeTab === 'login', 'text-gray-400 hover:text-white': activeTab !== 'login'}"
-        class="flex-1 py-3 px-6 rounded-full font-bold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-        aria-label="Switch to Login"
-      >
-        Login
-      </button>
-      <button
-        (click)="setActiveTab('register')"
-        [ngClass]="{'bg-green-600 text-white shadow-md': activeTab === 'register', 'text-gray-400 hover:text-white': activeTab !== 'register'}"
-        class="flex-1 py-3 px-6 rounded-full font-bold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-        aria-label="Switch to Register"
-      >
-        Register
-      </button>
-    </div>
-
-    <!-- Error Message Display -->
-    <div *ngIf="errorMessage" class="bg-red-900 bg-opacity-30 border border-red-500 text-red-300 px-5 py-3 rounded-md mb-6 text-center text-sm animate-fade-in">
-      {{ errorMessage }}
-    </div>
-
-    <!-- Login Form -->
-    <form *ngIf="activeTab === 'login'" (ngSubmit)="onSubmit()" class="space-y-6 animate-fade-in">
-      <div>
-        <label for="loginEmail" class="block text-gray-300 text-sm font-semibold mb-2">Email Address</label>
-        <input
-          type="email"
-          id="loginEmail"
-          name="email"
-          [(ngModel)]="loginForm.email"
-          class="auth-input"
-          placeholder="your.email@example.com"
-          required
-        >
-      </div>
-      <div class="relative">
-        <label for="loginPassword" class="block text-gray-300 text-sm font-semibold mb-2">Password</label>
-        <div class="relative flex items-center">
-          <input
-            [type]="passwordVisible ? 'text' : 'password'"
-            id="loginPassword"
-            name="password"
-            [(ngModel)]="loginForm.password"
-            class="auth-input flex-grow pr-10"
-            placeholder="••••••••"
-            required
-          >
-          <button type="button" (click)="togglePasswordVisibility()" class="absolute right-0 mr-3 text-gray-400 hover:text-white focus:outline-none" aria-label="Toggle password visibility">
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path *ngIf="!passwordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9c0 .546-.057 1.082-.164 1.603M21 21l-4.5-4.5M3.27 3.27l17.46 17.46"></path>
-              <path *ngIf="passwordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              <path *ngIf="passwordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-.367 1.258-1.077 2.378-1.996 3.31"></path>
-            </svg>
-          </button>
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black p-6 text-white">
+  <div class="w-full max-w-md bg-white/5 backdrop-blur-lg rounded-2xl shadow-2xl p-8 space-y-6 border border-white/10">
+    <h2 class="text-2xl font-bold text-center text-white tracking-wide">
+      {{ isLoginMode ? 'Welcome Back to Realtors 🏠' : 'Join Realtors — Secure Your Future Today 🔐' }}
+    </h2>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Show only in register mode -->
+      <div *ngIf="!isLoginMode" class="grid grid-cols-2 gap-3">
+        <div>
+          <input formControlName="firstName" type="text" placeholder="First Name" class="auth-input" />
+          <div *ngIf="authForm.get('firstName')?.invalid && (authForm.get('firstName')?.dirty || authForm.get('firstName')?.touched)" class="text-red-400 text-xs">First name is required.</div>
         </div>
-      </div>
-
-      <button type="submit" [disabled]="isLoading"
-              class="w-full inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full shadow-lg font-bold text-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900">
-        <span *ngIf="!isLoading">Login to My Account</span>
-        <span *ngIf="isLoading" class="flex items-center">
-          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-          Logging in...
-        </span>
-      </button>
-      <p class="text-center text-gray-400 text-sm mt-4">
-        Forgot your password? <a href="#" class="text-blue-400 hover:underline">Reset here</a>
-      </p>
-    </form>
-
-    <!-- Register Form -->
-    <form *ngIf="activeTab === 'register'" (ngSubmit)="onSubmit()" class="space-y-6 animate-fade-in">
-      <div>
-        <label for="registerUsername" class="block text-gray-300 text-sm font-semibold mb-2">Username</label>
-        <input
-          type="text"
-          id="registerUsername"
-          name="username"
-          [(ngModel)]="registerForm.username"
-          class="auth-input"
-          placeholder="Choose a username"
-          required
-        >
+        <div>
+          <input formControlName="lastName" type="text" placeholder="Last Name" class="auth-input" />
+          <div *ngIf="authForm.get('lastName')?.invalid && (authForm.get('lastName')?.dirty || authForm.get('lastName')?.touched)" class="text-red-400 text-xs">Last name is required.</div>
+        </div>
+        <input formControlName="username" type="text" placeholder="Username" class="auth-input col-span-2" />
       </div>
       <div>
-        <label for="registerEmail" class="block text-gray-300 text-sm font-semibold mb-2">Email Address</label>
-        <input
-          type="email"
-          id="registerEmail"
-          name="email"
-          [(ngModel)]="registerForm.email"
-          class="auth-input"
-          placeholder="your.email@example.com"
-          required
-        >
-      </div>
-      <div class="relative">
-        <label for="registerPassword" class="block text-gray-300 text-sm font-semibold mb-2">Password</label>
-        <div class="relative flex items-center">
-          <input
-            [type]="passwordVisible ? 'text' : 'password'"
-            id="registerPassword"
-            name="password"
-            [(ngModel)]="registerForm.password"
-            class="auth-input flex-grow pr-10"
-            placeholder="••••••••"
-            required
-          >
-          <button type="button" (click)="togglePasswordVisibility()" class="absolute right-0 mr-3 text-gray-400 hover:text-white focus:outline-none" aria-label="Toggle password visibility">
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path *ngIf="!passwordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9c0 .546-.057 1.082-.164 1.603M21 21l-4.5-4.5M3.27 3.27l17.46 17.46"></path>
-              <path *ngIf="passwordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              <path *ngIf="passwordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-.367 1.258-1.077 2.378-1.996 3.31"></path>
-            </svg>
-          </button>
+        <input formControlName="email" type="email" placeholder="Email" class="auth-input" />
+        <div *ngIf="authForm.get('email')?.invalid && (authForm.get('email')?.dirty || authForm.get('email')?.touched)" class="text-red-400 text-xs">
+          <div *ngIf="authForm.get('email')?.errors?.['required']">Email is required.</div>
+          <div *ngIf="authForm.get('email')?.errors?.['email']">Enter a valid email.</div>
         </div>
       </div>
       <div>
-        <label for="confirmPassword" class="block text-gray-300 text-sm font-semibold mb-2">Confirm Password</label>
-        <div class="relative flex items-center">
-          <input
-            [type]="passwordVisible ? 'text' : 'password'"
-            id="confirmPassword"
-            name="confirmPassword"
-            [(ngModel)]="registerForm.confirmPassword"
-            class="auth-input flex-grow pr-10"
-            placeholder="Repeat your password"
-            required
-          >
-          <button type="button" (click)="togglePasswordVisibility()" class="absolute right-0 mr-3 text-gray-400 hover:text-white focus:outline-none" aria-label="Toggle password visibility">
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path *ngIf="!passwordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9c0 .546-.057 1.082-.164 1.603M21 21l-4.5-4.5M3.27 3.27l17.46 17.46"></path>
-              <path *ngIf="passwordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              <path *ngIf="passwordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-.367 1.258-1.077 2.378-1.996 3.31"></path>
-            </svg>
-          </button>
+        <input formControlName="password" type="password" placeholder="Password" class="auth-input" />
+        <div *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.dirty || authForm.get('password')?.touched)" class="text-red-400 text-xs">
+          <div *ngIf="authForm.get('password')?.errors?.['required']">Password is required.</div>
+          <div *ngIf="authForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters.</div>
         </div>
       </div>
-
-      <div>
-        <label for="referralCode" class="block text-gray-300 text-sm font-semibold mb-2">Referral Code (Optional)</label>
-        <input
-          type="text"
-          id="referralCode"
-          name="referralCode"
-          [(ngModel)]="registerForm.referralCode"
-          class="auth-input"
-          placeholder="Enter referrer's code if you have one"
-          [readonly]="referralCodePreFilled"
-          [ngClass]="{'bg-gray-700': referralCodePreFilled}"
-        >
-        <p *ngIf="referralCodePreFilled" class="text-green-400 text-xs mt-2 animate-fade-in-down">
-          Referral code pre-filled from your invite link!
-        </p>
-        <p *ngIf="!referralCodePreFilled" class="text-gray-400 text-xs mt-2">
-          Been invited? Enter their code to link your accounts and support their earnings.
-        </p>
+      <div *ngIf="!isLoginMode">
+        <input formControlName="mobile" type="text" placeholder="Mobile Number (Optional)" class="auth-input" />
+        <div *ngIf="authForm.get('mobile')?.invalid && (authForm.get('mobile')?.dirty || authForm.get('mobile')?.touched)" class="text-red-400 text-xs">Mobile number is required.</div>
       </div>
-
-      <button type="submit" [disabled]="isLoading"
-              class="w-full inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full shadow-lg font-bold text-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-offset-2 focus:ring-offset-gray-900">
-        <span *ngIf="!isLoading">Register Account</span>
-        <span *ngIf="isLoading" class="flex items-center">
-          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-          Registering...
-        </span>
+      <input *ngIf="!isLoginMode" formControlName="referral" type="text" placeholder="Referral Code (Optional)" class="auth-input" />
+      <div class="flex items-center justify-between text-sm">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="accent-blue-500" />
+          <span>Remember me</span>
+        </label>
+        <button type="button" (click)="onForgotPassword()" class="text-blue-400 hover:underline">
+          Forgot password?
+        </button>
+      </div>
+      <button type="submit"
+        class="w-full py-2 rounded-md bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 font-semibold shadow-lg transition-all duration-300">
+        {{ isLoginMode ? 'Login' : 'Register' }}
       </button>
     </form>
+    <p class="text-center text-sm text-white/70">
+      {{ isLoginMode ? "Don't have an account?" : 'Already registered?' }}
+      <button (click)="toggleMode()" class="text-blue-400 hover:underline ml-1">
+        {{ isLoginMode ? 'Register Now' : 'Login' }}
+      </button>
+    </p>
   </div>
-</main> 
+</div> 

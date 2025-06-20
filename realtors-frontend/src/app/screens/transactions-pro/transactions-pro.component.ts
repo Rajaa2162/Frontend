@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HistoryComponent } from '../history/history.component';
 
 interface Transaction {
   id: string;
@@ -13,13 +14,14 @@ interface Transaction {
 }
 
 @Component({
-  selector: 'app-transactions-pro',
+  selector: 'app-wallet',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, HistoryComponent],
   templateUrl: './transactions-pro.component.html',
   styleUrls: ['./transactions-pro.component.css']
 })
-export class TransactionsProComponent {
+export class WalletComponent {
+  activeTab: 'balance' | 'deposit' | 'withdraw' | 'history' = 'balance';
   selectedTransactionType: 'deposit' | 'withdrawal' = 'deposit';
   transactionAmount: number | null = null;
   selectedMethod: string = 'USDT_TRC20';
@@ -228,5 +230,12 @@ export class TransactionsProComponent {
       { id: 'TX004', type: 'Withdrawal', amount: 200, method: 'USDT_TRC20', date: new Date('2025-06-12T11:45:00Z'), status: 'Completed' },
       { id: 'TX005', type: 'Deposit', amount: 75, method: 'USDT_ERC20', date: new Date('2025-06-11T14:00:00Z'), status: 'Failed' },
     ];
+  }
+
+  setTab(tab: 'balance' | 'deposit' | 'withdraw' | 'history') {
+    this.activeTab = tab;
+    this.errorMessage = '';
+    this.successMessage = '';
+    this.isLoading = false;
   }
 } 

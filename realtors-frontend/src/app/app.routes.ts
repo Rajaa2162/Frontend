@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './screens/home/home';
+import { HomeComponent } from './screens/home/home.component';
 import { DashboardComponent } from './screens/dashboard/dashboard';
-import { ProfileComponent } from './screens/profile/profile';
+import { ProfileComponent } from './screens/profile/profile.component';
 import { HistoryComponent } from './screens/history/history.component';
 import { ReferralsComponent } from './screens/referrals/referrals.component';
 import { AuthComponent } from './screens/auth/auth.component';
@@ -11,7 +11,7 @@ import { TestimonialsComponent } from './screens/testimonials/testimonials';
 import { FaqComponent } from './screens/faq/faq';
 import { ContactComponent } from './screens/contact/contact';
 import { NotFound } from './screens/not-found/not-found';
-import { TransactionsProComponent } from './screens/transactions-pro/transactions-pro.component';
+import { WalletComponent } from './screens/transactions-pro/transactions-pro.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +26,6 @@ export const routes: Routes = [
   { path: 'testimonials', component: TestimonialsComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'transactions', component: TransactionsProComponent },
+  { path: 'wallet', component: WalletComponent },
   { path: '**', component: NotFound }
 ];
