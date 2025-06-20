@@ -1,0 +1,28 @@
+/* Testimonials component styles */
+.testimonial-card {
+  @apply bg-gray-800 rounded-lg p-6 relative;
+}
+
+.testimonial-content {
+  @apply text-gray-300 mb-4;
+}
+
+.testimonial-author {
+  @apply flex items-center;
+}
+
+.author-avatar {
+  @apply w-10 h-10 rounded-full bg-gray-700;
+}
+
+.author-info {
+  @apply ml-3;
+}
+
+.author-name {
+  @apply text-white font-medium;
+}
+
+.author-title {
+  @apply text-gray-400 text-sm;
+} 

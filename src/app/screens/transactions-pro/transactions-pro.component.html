@@ -1,0 +1,117 @@
+<main class="wallet-bg min-h-screen text-white">
+  <!-- Tab Bar -->
+  <nav class="wallet-tabs flex justify-center gap-4 py-8">
+    <button (click)="setTab('balance')" [class.active]="activeTab === 'balance'">Balance</button>
+    <button (click)="setTab('deposit')" [class.active]="activeTab === 'deposit'">Deposit</button>
+    <button (click)="setTab('withdraw')" [class.active]="activeTab === 'withdraw'">Withdraw</button>
+    <button (click)="setTab('history')" [class.active]="activeTab === 'history'">History</button>
+  </nav>
+
+  <!-- Balance Card -->
+  <section *ngIf="activeTab === 'balance'" class="flex justify-center items-center py-12">
+    <div class="balance-card glass-effect shadow-2xl p-10 rounded-3xl text-center animate-scale-in">
+      <div class="ai-icon mb-4">
+        <svg width="48" height="48" fill="none" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" stroke="#00f2fe" stroke-width="2" fill="#101828"/><path d="M24 14v10l7 4" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 class="text-2xl font-bold mb-2 tracking-wide">Current Balance</h2>
+      <div class="text-5xl font-extrabold text-cyan-300 mb-2 drop-shadow-glow">${{ currentBalance | number:'1.2-2' }}</div>
+      <div class="text-gray-300">AI-Optimized Portfolio</div>
+    </div>
+  </section>
+
+  <!-- Deposit Tab -->
+  <section *ngIf="activeTab === 'deposit'" class="flex justify-center py-8">
+    <form (ngSubmit)="initiateTransaction()" class="wallet-form glass-effect p-8 rounded-2xl w-full max-w-lg animate-fade-in space-y-6">
+      <h2 class="text-xl font-bold mb-4 text-cyan-200">Deposit Funds</h2>
+      <div>
+        <label for="amount" class="block mb-1">Amount (USD)</label>
+        <input type="number" id="amount" name="amount" [(ngModel)]="transactionAmount" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-cyan-700 text-white focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g., 100" title="Enter deposit amount" [min]="minDeposit" required>
+        <p class="text-xs text-gray-400 mt-1">Minimum deposit: ${{ minDeposit }} USD.</p>
+      </div>
+      <div>
+        <label for="method" class="block mb-1">Select Method</label>
+        <select id="method" name="method" [(ngModel)]="selectedMethod" (change)="onMethodChange()" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-cyan-700 text-white focus:ring-cyan-500 focus:border-cyan-500" required title="Select deposit method">
+          <option value="">-- Choose Method --</option>
+          <option value="USDT_TRC20">USDT (TRC20)</option>
+          <option value="USDT_ERC20">USDT (ERC20)</option>
+          <option value="BTC">Bitcoin (BTC)</option>
+          <option value="ETH">Ethereum (ETH)</option>
+          <option value="BankTransfer_INR">Bank Transfer (INR)</option>
+        </select>
+      </div>
+      <div *ngIf="isCryptoMethod(selectedMethod)" class="bg-gray-900 p-4 rounded-md">
+        <div class="text-xs text-gray-400 mb-2">Deposit Address ({{ selectedMethod }}):</div>
+        <div class="flex items-center bg-gray-800 rounded-md p-2">
+          <input type="text" [value]="getDepositAddress(selectedMethod)" readonly class="flex-grow bg-transparent border-none text-white text-sm font-mono truncate" />
+          <button type="button" class="ml-2 text-cyan-400 hover:text-cyan-200" (click)="copyToClipboard(getDepositAddress(selectedMethod))" aria-label="Copy address">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2.293a1 1 0 01.707.293l3.707 3.707A1 1 0 0121 12.293V17m-9 2h.01"></path></svg>
+          </button>
+        </div>
+        <div class="text-xs text-orange-400 mt-2">Send only <span class="text-white">{{ selectedMethod }}</span> to this address.</div>
+      </div>
+      <div *ngIf="selectedMethod === 'BankTransfer_INR'" class="bg-gray-900 p-4 rounded-md">
+        <div class="text-xs text-gray-400 mb-2">Bank Details:</div>
+        <ul class="text-white text-xs font-mono space-y-1">
+          <li>Bank: <span class="text-cyan-300">FEDERAL BANK</span></li>
+          <li>Account: <span class="text-cyan-300">REALTORS AI PVT LTD</span></li>
+          <li>Number: <span class="text-cyan-300">9876543210987</span></li>
+          <li>IFSC: <span class="text-cyan-300">FDRL000ABCD</span></li>
+        </ul>
+      </div>
+      <button type="submit" [disabled]="isLoading" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 ease-in-out shadow-lg">
+        <span *ngIf="!isLoading">Confirm Deposit</span>
+        <span *ngIf="isLoading" class="flex items-center"><svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...</span>
+      </button>
+      <div *ngIf="errorMessage" class="bg-red-900 bg-opacity-30 border border-red-500 text-red-300 px-5 py-3 rounded-md mt-4 text-center text-sm animate-fade-in">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="bg-green-900 bg-opacity-30 border border-green-500 text-green-300 px-5 py-3 rounded-md mt-4 text-center text-sm animate-fade-in">{{ successMessage }}</div>
+    </form>
+  </section>
+
+  <!-- Withdraw Tab -->
+  <section *ngIf="activeTab === 'withdraw'" class="flex justify-center py-8">
+    <form (ngSubmit)="initiateTransaction()" class="wallet-form glass-effect p-8 rounded-2xl w-full max-w-lg animate-fade-in space-y-6">
+      <h2 class="text-xl font-bold mb-4 text-pink-200">Withdraw Funds</h2>
+      <div>
+        <label for="amountW" class="block mb-1">Amount (USD)</label>
+        <input type="number" id="amountW" name="amountW" [(ngModel)]="transactionAmount" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-pink-700 text-white focus:ring-pink-500 focus:border-pink-500" placeholder="e.g., 500" title="Enter withdrawal amount" [min]="minWithdrawal" required>
+        <p class="text-xs text-gray-400 mt-1">Minimum withdrawal: ${{ minWithdrawal }} USD.</p>
+      </div>
+      <div>
+        <label for="methodW" class="block mb-1">Select Method</label>
+        <select id="methodW" name="methodW" [(ngModel)]="selectedMethod" (change)="onMethodChange()" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-pink-700 text-white focus:ring-pink-500 focus:border-pink-500" required title="Select withdrawal method">
+          <option value="">-- Choose Method --</option>
+          <option value="USDT_TRC20">USDT (TRC20)</option>
+          <option value="BankTransfer_INR">Bank Transfer (INR)</option>
+        </select>
+      </div>
+      <div *ngIf="isCryptoMethod(selectedMethod)" class="bg-gray-900 p-4 rounded-md">
+        <label for="withdrawalCryptoAddress" class="block mb-1">Your {{ selectedMethod }} Wallet Address</label>
+        <input type="text" id="withdrawalCryptoAddress" name="withdrawalCryptoAddress" [(ngModel)]="withdrawalAddress" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-pink-700 text-white" placeholder="Enter your {{ selectedMethod }} address here" title="Enter your {{ selectedMethod }} address here" [attr.aria-label]="'Enter your ' + selectedMethod + ' address here'" required>
+        <div class="text-xs text-orange-400 mt-2">Double-check your address. Funds sent to an incorrect address cannot be recovered.</div>
+      </div>
+      <div *ngIf="selectedMethod === 'BankTransfer_INR'" class="bg-gray-900 p-4 rounded-md">
+        <label for="bankAccountNumWithdraw" class="block mb-1">Your Bank Account Number</label>
+        <input type="text" id="bankAccountNumWithdraw" name="bankAccountNumWithdraw" [(ngModel)]="bankAccountNum" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-pink-700 text-white" placeholder="e.g., 1234567890" title="Enter your bank account number" required>
+        <label for="ifscCodeWithdraw" class="block mt-3 mb-1">Your IFSC Code</label>
+        <input type="text" id="ifscCodeWithdraw" name="ifscCodeWithdraw" [(ngModel)]="ifscCode" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-pink-700 text-white" placeholder="e.g., ABCD0001234" title="Enter your IFSC code" required>
+      </div>
+      <div>
+        <label for="securityCode" class="block mb-1">2FA / Security Code</label>
+        <input type="text" id="securityCode" name="securityCode" [(ngModel)]="securityCode" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-pink-700 text-white" placeholder="Enter 2FA code" title="Enter 2FA or security code" maxlength="6" required>
+      </div>
+      <button type="submit" [disabled]="isLoading" class="w-full bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 ease-in-out shadow-lg">
+        <span *ngIf="!isLoading">Request Withdrawal</span>
+        <span *ngIf="isLoading" class="flex items-center"><svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...</span>
+      </button>
+      <div *ngIf="errorMessage" class="bg-red-900 bg-opacity-30 border border-red-500 text-red-300 px-5 py-3 rounded-md mt-4 text-center text-sm animate-fade-in">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="bg-green-900 bg-opacity-30 border border-green-500 text-green-300 px-5 py-3 rounded-md mt-4 text-center text-sm animate-fade-in">{{ successMessage }}</div>
+    </form>
+  </section>
+
+  <!-- History Tab -->
+  <section *ngIf="activeTab === 'history'" class="flex justify-center py-8 animate-fade-in">
+    <div class="w-full max-w-3xl">
+      <app-history></app-history>
+    </div>
+  </section>
+</main> 

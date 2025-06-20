@@ -1,0 +1,466 @@
+.parallax-bg {
+  transform: translateZ(-1px) scale(2);
+  z-index: -1;
+}
+
+.profile-input {
+  @apply bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300;
+}
+
+.profile-input:hover {
+  border-color: rgb(6, 182, 212);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+}
+
+.profile-link-button {
+  @apply flex items-center justify-center px-6 py-3 rounded-lg text-white font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-opacity-50;
+}
+
+/* Animations */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounceSubtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 2s infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #8B5CF6, #3B82F6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #7C3AED, #2563EB);
+}
+
+/* Toggle Switch */
+.dot {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Forced Colors Mode Support */
+@media (forced-colors: active) {
+  .profile-input,
+  .profile-link-button,
+  button {
+    border: 2px solid CanvasText;
+  }
+
+  .profile-input:focus,
+  .profile-link-button:focus,
+  button:focus {
+    outline: 2px solid CanvasText;
+    outline-offset: 2px;
+  }
+
+  .dot {
+    border: 2px solid CanvasText;
+  }
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Password strength indicator colors */
+.bg-red-500 {
+  background: linear-gradient(to right, rgb(239, 68, 68), rgb(185, 28, 28));
+}
+
+.bg-orange-500 {
+  background: linear-gradient(to right, rgb(249, 115, 22), rgb(194, 65, 12));
+}
+
+.bg-yellow-500 {
+  background: linear-gradient(to right, rgb(234, 179, 8), rgb(161, 98, 7));
+}
+
+.bg-green-500 {
+  background: linear-gradient(to right, rgb(34, 197, 94), rgb(22, 163, 74));
+}
+
+/* Toggle switch animations */
+.peer:checked ~ .peer-checked\:after\:translate-x-full {
+  transform: translateX(100%);
+}
+
+.peer:checked ~ .peer-checked\:bg-cyan-600 {
+  background: linear-gradient(to right, rgb(8, 145, 178), rgb(147, 51, 234));
+}
+
+/* Hover effects */
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+.hover\:scale-95:active {
+  transform: scale(0.95);
+}
+
+/* Focus ring styles */
+.focus\:ring-2:focus {
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.5);
+}
+
+.focus\:ring-cyan-500:focus {
+  --tw-ring-color: rgb(6, 182, 212);
+}
+
+/* Transition effects */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.transition-colors {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .max-w-4xl {
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+  
+  .p-6 {
+    padding: 1rem;
+  }
+  
+  .space-x-6 > * + * {
+    margin-left: 1rem;
+  }
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Futuristic card effects */
+.card-glow {
+  position: relative;
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, rgb(6, 182, 212), rgb(147, 51, 234));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+/* Animated background elements */
+.animate-pulse {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.delay-1000 {
+  animation-delay: 1s;
+}
+
+/* Text gradient animation */
+.text-gradient {
+  background: linear-gradient(90deg, #8B5CF6, #3B82F6, #8B5CF6);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientText 3s linear infinite;
+}
+
+/* Button hover effects */
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+button:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Input focus effects */
+input:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Loading spinner */
+.loading-spinner {
+  @apply animate-spin rounded-full border-4 border-white/20 border-t-white;
+}
+
+/* Password strength indicator */
+.password-strength {
+  height: 4px;
+  transition: all 0.3s ease;
+}
+
+.password-strength.weak {
+  background: linear-gradient(to right, #EF4444, #F97316);
+}
+
+.password-strength.medium {
+  background: linear-gradient(to right, #F97316, #FBBF24);
+}
+
+.password-strength.strong {
+  background: linear-gradient(to right, #22C55E, #10B981);
+}
+
+/* Button hover effects */
+.btn-hover-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-hover-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-hover-effect:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Animated background elements */
+.animated-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.animated-bg::before,
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #8B5CF6, #3B82F6);
+  opacity: 0.1;
+  animation: pulse 8s infinite;
+}
+
+.animated-bg::before {
+  top: -150px;
+  left: -150px;
+}
+
+.animated-bg::after {
+  bottom: -150px;
+  right: -150px;
+  animation-delay: -4s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .glass-effect {
+    padding: 1rem;
+  }
+
+  .animated-bg::before,
+  .animated-bg::after {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* Toast notification animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-notification {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Toggle switch animation */
+.toggle-switch {
+  transition: background-color 0.3s ease;
+}
+
+.toggle-switch::after {
+  transition: transform 0.3s ease;
+}
+
+/* Form input focus effect */
+.form-input:focus {
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Profile photo upload hover effect */
+.photo-upload:hover .upload-overlay {
+  opacity: 1;
+}
+
+.upload-overlay {
+  transition: opacity 0.3s ease;
+}
+
+/* Activity item hover effect */
+.activity-item {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.activity-item:hover {
+  transform: translateX(5px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Loading state animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.loading-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.1) 25%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+} 

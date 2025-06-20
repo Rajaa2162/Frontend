@@ -1,0 +1,437 @@
+<!-- Main Container -->
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-4 md:p-8">
+  <!-- Toast Notification -->
+  <div *ngIf="toastMessage.show" 
+       [class]="'fixed top-4 right-4 p-4 rounded-lg shadow-lg transform transition-all duration-300 ' + 
+                (toastMessage.type === 'success' ? 'bg-green-500' : 
+                 toastMessage.type === 'error' ? 'bg-red-500' : 'bg-blue-500') + 
+                ' text-white z-50'">
+    {{ toastMessage.message }}
+    </div>
+
+  <!-- Profile Content -->
+  <div class="max-w-7xl mx-auto space-y-8">
+    <!-- User Identity Card -->
+    <div class="glass-effect rounded-2xl p-6 md:p-8 transform hover:scale-[1.02] transition-all duration-300">
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <!-- Profile Photo -->
+        <div class="relative group">
+          <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-500 shadow-xl transform hover:scale-105 transition-all duration-300">
+            <img [src]="userProfile.profilePhoto || 'assets/default-avatar.png'" 
+                 [alt]="userProfile.fullName + '\'s profile photo'"
+                 title="Profile photo"
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="absolute bottom-2 right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+          <label class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer rounded-full">
+            <input type="file" 
+                   accept="image/*" 
+                   (change)="onPhotoUpload($event)" 
+                   class="hidden"
+                   aria-label="Upload profile photo">
+            <span class="text-white text-sm">Change Photo</span>
+            </label>
+          <div *ngIf="loadingStates.photo" class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full">
+            <div class="animate-spin rounded-full h-8 w-8 border-4 border-white border-t-transparent"></div>
+          </div>
+        </div>
+
+        <!-- User Info -->
+        <div class="flex-1 text-center md:text-left">
+          <h1 class="text-3xl font-bold text-white">
+            {{ userProfile.fullName }}
+          </h1>
+          <p class="text-gray-300 mt-2">User ID: {{ userProfile.userId }}</p>
+          <p class="text-gray-300">{{ userProfile.email }}</p>
+          <p class="text-gray-300">Last login: {{ userProfile.lastLogin | date:'medium' }}</p>
+          <span class="inline-block mt-2 px-3 py-1 text-xs bg-green-100 text-green-700 rounded-full">
+            {{ userProfile.kycStatus.status }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Information -->
+    <div class="glass-effect rounded-2xl p-6 md:p-8 transform hover:scale-[1.02] transition-all duration-300">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-white">Personal Information</h2>
+        <button (click)="toggleEditMode('account')" 
+                class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300">
+          {{ editMode.account ? 'Cancel' : 'Edit' }}
+        </button>
+      </div>
+
+      <form [formGroup]="personalInfoForm" (ngSubmit)="saveProfile()" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="form-group">
+            <label for="fullName" class="block text-gray-300 mb-2">Full Name</label>
+            <input type="text" 
+                   id="fullName"
+                   formControlName="fullName"
+                   class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                   aria-label="Full name">
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="block text-gray-300 mb-2">Email</label>
+            <input type="email" 
+                   id="email"
+                   formControlName="email"
+                   class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                   aria-label="Email address">
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="block text-gray-300 mb-2">Phone</label>
+            <input type="tel" 
+                   id="phone"
+                   formControlName="phone"
+                   class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                   aria-label="Phone number">
+          </div>
+
+          <div class="form-group">
+            <label for="username" class="block text-gray-300 mb-2">Username</label>
+            <input type="text" 
+                   id="username"
+                   formControlName="username"
+                   class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                   aria-label="Username">
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfBirth" class="block text-gray-300 mb-2">Date of Birth</label>
+            <input type="date" 
+                   id="dateOfBirth"
+                   formControlName="dateOfBirth"
+                   class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                   aria-label="Date of birth">
+          </div>
+
+          <div class="form-group">
+            <label for="gender" class="block text-gray-300 mb-2">Gender</label>
+            <select id="gender"
+                    formControlName="gender"
+                    class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                    aria-label="Gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div *ngIf="editMode.account" class="flex justify-end mt-6">
+          <button type="submit"
+                  [disabled]="loadingStates.profile"
+                  class="px-6 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 transform hover:scale-105">
+            <span *ngIf="!loadingStates.profile">Save Changes</span>
+            <div *ngIf="loadingStates.profile" class="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- KYC Section -->
+    <div class="glass-effect rounded-2xl p-6 md:p-8 transform hover:scale-[1.02] transition-all duration-300">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-white">KYC Verification</h2>
+        <button (click)="toggleEditMode('kyc')" 
+                class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300">
+          {{ editMode.kyc ? 'Cancel' : 'Update KYC' }}
+        </button>
+      </div>
+
+      <form [formGroup]="kycForm" (ngSubmit)="submitKYC()" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Aadhar Card -->
+          <div class="space-y-4">
+            <label class="block text-gray-300 font-medium">Aadhar Card</label>
+            <div class="space-y-2">
+              <div>
+                <label class="block text-sm text-gray-400 mb-1">Front</label>
+                <input type="file" 
+                       formControlName="aadharFront"
+                       accept="image/*,application/pdf"
+                       class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                       aria-label="Aadhar card front">
+              </div>
+              <div>
+                <label class="block text-sm text-gray-400 mb-1">Back</label>
+                <input type="file" 
+                       formControlName="aadharBack"
+                       accept="image/*,application/pdf"
+                       class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                       aria-label="Aadhar card back">
+              </div>
+            </div>
+          </div>
+
+          <!-- PAN Card -->
+          <div class="space-y-4">
+            <label class="block text-gray-300 font-medium">PAN Card</label>
+            <input type="file" 
+                   formControlName="panCard"
+                   accept="image/*,application/pdf"
+                   class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                   aria-label="PAN card">
+          </div>
+
+          <!-- Voter ID -->
+          <div class="space-y-4">
+            <label class="block text-gray-300 font-medium">Voter ID (Optional)</label>
+            <input type="file" 
+                   formControlName="voterId"
+                   accept="image/*,application/pdf"
+                   class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                   aria-label="Voter ID">
+          </div>
+
+          <!-- Address Proof -->
+          <div class="space-y-4">
+            <label class="block text-gray-300 font-medium">Address Proof</label>
+            <input type="file" 
+                   formControlName="addressProof"
+                   accept="image/*,application/pdf"
+                   class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300"
+                   aria-label="Address proof">
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mt-6">
+          <div>
+            <p class="text-sm text-gray-300">KYC Status:</p>
+            <span [class]="'inline-block mt-1 px-3 py-1 text-xs rounded-full ' + 
+                          (userProfile.kycStatus.status === 'Verified' ? 'bg-green-100 text-green-700' : 
+                           userProfile.kycStatus.status === 'Rejected' ? 'bg-red-100 text-red-700' : 
+                           'bg-yellow-100 text-yellow-700')">
+              {{ userProfile.kycStatus.status }}
+            </span>
+          </div>
+          <button *ngIf="editMode.kyc"
+                  type="submit"
+                  [disabled]="loadingStates.kyc"
+                  class="px-6 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 transform hover:scale-105">
+            <span *ngIf="!loadingStates.kyc">Submit KYC</span>
+            <div *ngIf="loadingStates.kyc" class="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Wallet & Earnings -->
+    <div class="glass-effect rounded-2xl p-6 md:p-8 transform hover:scale-[1.02] transition-all duration-300 relative overflow-hidden">
+      <!-- Animated Gradient Glow -->
+      <div class="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-cyan-500 via-purple-500 to-blue-500 opacity-30 rounded-full blur-2xl pointer-events-none"></div>
+      <h2 class="text-2xl font-semibold text-white mb-6 flex items-center gap-2">
+        <svg class="w-7 h-7 text-cyan-400 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M17 9V7a5 5 0 00-10 0v2M5 9h14a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2v-7a2 2 0 012-2z"/>
+        </svg>
+        Wallet & Earnings
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Wallet Address Card -->
+        <div class="card-glow card-hover p-6 rounded-xl bg-white/5 flex flex-col gap-2 relative">
+          <span class="text-gray-400 text-sm">Wallet Address</span>
+          <span class="font-mono text-blue-400 break-all text-lg">{{ userProfile.wallet.address }}</span>
+          <button (click)="copyToClipboard(userProfile.wallet.address)" class="btn-hover-effect mt-2 px-3 py-1 rounded bg-cyan-600/80 hover:bg-cyan-500 text-white text-xs transition-all">
+            Copy Address
+          </button>
+        </div>
+        <!-- Earnings Card -->
+        <div class="card-glow card-hover p-6 rounded-xl bg-white/5 flex flex-col gap-2 relative">
+          <span class="text-gray-400 text-sm">Total Earned</span>
+          <span class="text-green-400 text-2xl font-bold">₹{{ userProfile.wallet.totalEarned }}</span>
+          <span class="text-gray-400 text-sm mt-2">Daily Returns</span>
+          <span class="text-cyan-400 text-lg">₹{{ userProfile.wallet.dailyReturns }}/day</span>
+          <span class="text-gray-400 text-sm mt-2">Withdrawable</span>
+          <span class="text-yellow-400 text-lg">₹{{ userProfile.wallet.withdrawable }}</span>
+        </div>
+      </div>
+      <div class="mt-8 flex flex-col md:flex-row items-center justify-end gap-4">
+        <button (click)="withdrawFunds()"
+                [disabled]="loadingStates.withdrawal"
+                class="btn-hover-effect px-8 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold shadow-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+          <span *ngIf="!loadingStates.withdrawal">Withdraw Now</span>
+          <div *ngIf="loadingStates.withdrawal" class="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+        </button>
+        <span class="text-xs text-gray-400">Withdrawals processed within 24 hours</span>
+      </div>
+    </div>
+
+    <!-- Investment History -->
+    <div class="glass-effect rounded-2xl p-6 md:p-8 transform hover:scale-[1.02] transition-all duration-300">
+      <h2 class="text-2xl font-semibold text-white mb-6">Investment History</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead class="bg-white/5">
+            <tr>
+              <th class="p-4 text-gray-300">Date</th>
+              <th class="p-4 text-gray-300">Plan</th>
+              <th class="p-4 text-gray-300">Amount</th>
+              <th class="p-4 text-gray-300">Daily Return</th>
+              <th class="p-4 text-gray-300">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10">
+            <tr *ngFor="let investment of userProfile.investments" class="hover:bg-white/5">
+              <td class="p-4 text-gray-300">{{ investment.date | date:'medium' }}</td>
+              <td class="p-4 text-gray-300">{{ investment.plan }}</td>
+              <td class="p-4 text-gray-300">₹{{ investment.amount }}</td>
+              <td class="p-4 text-gray-300">₹{{ investment.dailyReturn }}</td>
+              <td class="p-4">
+                <span [class]="'px-2 py-1 text-xs rounded-full ' + 
+                              (investment.status === 'Active' ? 'bg-green-100 text-green-700' : 
+                               investment.status === 'Completed' ? 'bg-blue-100 text-blue-700' : 
+                               'bg-yellow-100 text-yellow-700')">
+                  {{ investment.status }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- AI Activity Logs -->
+    <div class="glass-effect rounded-2xl p-6 md:p-8 transform hover:scale-[1.02] transition-all duration-300">
+      <h2 class="text-2xl font-semibold text-white mb-6">AI Interaction Logs</h2>
+      <div class="space-y-4">
+        <div *ngFor="let log of userProfile.aiLogs" 
+             class="p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300">
+          <div class="flex items-start justify-between">
+            <div class="flex items-start space-x-3">
+              <span [class]="'w-2 h-2 rounded-full mt-2 ' + 
+                            (log.status === 'Success' ? 'bg-green-500' : 'bg-red-500')"></span>
+              <div>
+                <p class="text-gray-300">{{ log.query }}</p>
+                <p class="text-sm text-gray-400">{{ log.timestamp | date:'medium' }}</p>
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Referral Section -->
+    <div class="glass-effect rounded-2xl p-6 md:p-8 transform hover:scale-[1.02] transition-all duration-300">
+      <h2 class="text-2xl font-semibold text-white mb-6">Referral Program</h2>
+      <div class="text-center">
+        <p class="text-gray-300 mb-4">Invite your friends and earn rewards!</p>
+        <div class="flex items-center justify-center space-x-2 mb-4">
+          <input type="text" 
+                 [value]="userProfile.referral.code"
+                 readonly
+                 class="profile-input w-1/2 text-center"
+                 aria-label="Referral code">
+          <button (click)="copyReferralCode()"
+                  class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300">
+            Copy
+          </button>
+        </div>
+        <p class="text-gray-300">
+          You've referred <strong>{{ userProfile.referral.totalReferrals }}</strong> users and earned 
+          <strong>₹{{ userProfile.referral.earnings }}</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Security Settings -->
+    <div class="glass-effect rounded-2xl p-6 md:p-8 transform hover:scale-[1.02] transition-all duration-300">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-white">Security Settings</h2>
+        <button (click)="toggleEditMode('password')" 
+                class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-300">
+          {{ editMode.password ? 'Cancel' : 'Change Password' }}
+        </button>
+      </div>
+
+      <div *ngIf="editMode.password" class="space-y-4">
+        <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+          <div class="space-y-4">
+            <div class="form-group">
+              <label for="currentPassword" class="block text-gray-300 mb-2">Current Password</label>
+              <input type="password" 
+                     id="currentPassword"
+                     formControlName="currentPassword"
+                     class="profile-input w-full"
+                     aria-label="Current password">
+            </div>
+
+            <div class="form-group">
+              <label for="newPassword" class="block text-gray-300 mb-2">New Password</label>
+              <input [type]="showPassword ? 'text' : 'password'"
+                     id="newPassword"
+                     formControlName="newPassword"
+                     class="profile-input w-full"
+                     aria-label="New password">
+              <div *ngIf="formErrors['newPassword']" class="text-red-400 text-sm mt-1">
+                {{ formErrors['newPassword'] }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword" class="block text-gray-300 mb-2">Confirm New Password</label>
+              <input [type]="showPassword ? 'text' : 'password'"
+                     id="confirmPassword"
+                     formControlName="confirmPassword"
+                     class="profile-input w-full"
+                     aria-label="Confirm new password">
+              <div *ngIf="formErrors['confirmPassword']" class="text-red-400 text-sm mt-1">
+                {{ formErrors['confirmPassword'] }}
+              </div>
+            </div>
+
+            <div class="flex items-center mt-2">
+              <input type="checkbox" 
+                     id="showPassword"
+                     [(ngModel)]="showPassword"
+                     [ngModelOptions]="{standalone: true}"
+                     class="mr-2"
+                     aria-label="Show password">
+              <label for="showPassword" class="text-gray-300">Show password</label>
+            </div>
+
+            <div *ngIf="passwordForm.get('newPassword')?.value" class="mt-4">
+              <div class="flex justify-between text-sm text-gray-300 mb-1">
+                <span>Password Strength</span>
+                <span>{{ getPasswordStrengthText() }}</span>
+              </div>
+              <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                <div [class]="getPasswordStrengthColor()"
+                     class="h-full transition-all duration-300"
+                     [style.width.%]="passwordStrength">
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end mt-6">
+              <button type="submit"
+                      [disabled]="loadingStates.password"
+                      class="px-6 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:from-purple-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105">
+                <span *ngIf="!loadingStates.password">Update Password</span>
+                <div *ngIf="loadingStates.password" class="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="mt-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-medium text-white">Two-Factor Authentication</h3>
+            <p class="text-gray-300 text-sm">Add an extra layer of security to your account</p>
+          </div>
+          <button (click)="toggle2FA()"
+                  [disabled]="loadingStates.profile"
+                  class="px-4 py-2 rounded-lg"
+                  [class]="userProfile.twoFactorEnabled ? 'bg-green-500 hover:bg-green-600' : 'bg-white/10 hover:bg-white/20'">
+            <span *ngIf="!loadingStates.profile">{{ userProfile.twoFactorEnabled ? 'Enabled' : 'Disabled' }}</span>
+            <div *ngIf="loadingStates.profile" class="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
